@@ -1,0 +1,9 @@
+{
+  "name": "foobar-model",
+  "version": "0.0.1",
+  "description": "Rocks, scissors and paper game based on a simple ml model",
+  "main": "index.js",
+  "author": "Thomas Tinnesand Eng",
+  "license": "MIT",
+  "private": true
+}
