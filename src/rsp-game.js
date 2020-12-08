@@ -73,7 +73,7 @@ export const RspGame = ({ url, onDone }) => {
       setStatus('ready');
     } catch (err) {
       console.log(err);
-      setErrMsg(err.message);
+      setErrMsg(err.toString());
       setStatus('error');
     }
 
