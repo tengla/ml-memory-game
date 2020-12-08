@@ -3,3 +3,33 @@
   margin: 0 auto;
   font-family: sans-serif;
 }
+
+button.button {
+  border: 1px solid #ccc;
+  margin: 10px 0;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #066b06;
+  color: white;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+button.button:hover {
+  background-color: #3eaf3e;
+}
+
+.description .description-images {
+  max-width: 400px;
+}
+
+.description .description-images img {
+  max-width: 100%;
+  width: 90px;
+  margin: 0 5px;
+}
+
+.game {
+  text-align: center;
+}

@@ -1,12 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { createPredictor, Game } from './utils';
+import { createPredictor, createGame, tr } from './utils';
+import { ResolvedHands } from './resolved-hands';
+import { Prediction } from './prediction';
 
-const url = "https://teachablemachine.withgoogle.com/models/Rza-yJgJW/";
-const modelURL = url + "model.json";
-const metadataURL = url + "metadata.json";
+// https://teachablemachine.withgoogle.com/models/Rza-yJgJW/;
+// https://teachablemachine.withgoogle.com/models/xf82yR2IE/
+
 let iterations = 0;
+const game = createGame();
 
-export const RspGame = ({ onDone }) => {
+export const RspGame = ({ url, onDone }) => {
+
+  const modelURL = url + "model.json";
+  const metadataURL = url + "metadata.json";
 
   const [status, setStatus] = useState('loading');
   const [currentPrediction, setCurrentPrediction] = useState(null);
@@ -19,26 +25,34 @@ export const RspGame = ({ onDone }) => {
   const loop = async () => {
     if (iterations % 8 === 0) {
       webcamRef.current.update();
-      const cur = await predictRef.current(
+      const cur = await predictRef.current.predict(
         modelRef.current, webcamRef.current.canvas);
-      if (cur) {
-        const isWin = Game.shake(cur.className, Game.currentHand);
+
+      setCurrentPrediction(cur);
+
+      if (cur && game.hands.includes(cur.className)) {
+        const isWin = game.shake(cur.className, game.currentHand);
         if (isWin) {
-          Game.resolve(Game.currentHand);
-        } else if (Game.resolved.length > 1) {
+          game.resolve(game.currentHand);
+        } else if (game.resolved.length > 1) {
           webcamRef.current.stop();
-          const count = Game.resolved.length + 0;
-          Game.resolved = [];
+          const count = game.resolved.length + 0;
+          game.resolved = [];
+          setStatus('done');
           onDone({
-            timeUsed: Game.timeUsed(),
-            count
+            timeUsed: game.timeUsed(),
+            count,
+            details: {
+              currentHand: game.currentHand.toString(),
+              prediction: cur.className
+            }
           });
           return;
         } else {
-          Game.resolved = [];
+          game.resolved = [];
         }
-        Game.currentHand = Game.randomHand();
-        setCurrentPrediction(cur);
+        game.currentHand = game.randomHand();
+
       }
     }
     rafRef.current = requestAnimationFrame(loop);
@@ -47,7 +61,7 @@ export const RspGame = ({ onDone }) => {
 
   useEffect(async () => {
 
-    Game.currentHand = Game.randomHand();
+    game.assignRandomCurrentHand();
 
     modelRef.current = await tmImage.load(modelURL, metadataURL);
     setStatus('initializing');
@@ -57,7 +71,10 @@ export const RspGame = ({ onDone }) => {
     await webcam.play();
     setStatus('ready');
 
-    predictRef.current = createPredictor(modelRef.current, webcam.canvas);
+    predictRef.current = {
+      predict: createPredictor(modelRef.current, webcam.canvas)
+    };
+
     webcamRef.current = webcam;
     videoRef.current.appendChild(webcam.canvas);
     // start
@@ -67,47 +84,20 @@ export const RspGame = ({ onDone }) => {
     }
   }, []);
 
-  const tr = hand => {
-    const o = {
-      rock: 'stein',
-      scissors: 'saks',
-      paper: 'papir',
-      loading: 'Laster ml',
-      initializing: 'Initialiserer webcam',
-      ready: 'Klar til bruk'
-    };
-    return o[hand];
-  };
-
   return (
-    <div>
-      <div>{tr(status)}</div>
+    <div className='game'>
+      <h2>{tr(status)}</h2>
       <div ref={videoRef}></div>
       <div style={{
         display: status === 'ready' ? 'block' : 'none'
       }}>
-        <div>
-          Prediction: {currentPrediction?.className} {currentPrediction?.probability.toFixed(2)}
-        </div>
-        <div>Hva slår {tr(Game.currentHand)}?</div>
-        <ul style={{
-          margin: '20px 0 0 0',
-          padding: '0',
-          listStyle: 'none'
-        }}>{Game.resolved.map((res, idx) => {
-          return <li
-            key={`res-${idx}`}
-            style={{
-              padding: '5px',
-              margin: '5px',
-              border: '1px solid #ccc',
-              backgroundColor: 'green',
-              color: 'white',
-              display: 'inline-block',
-              borderRadius: '4px'
-            }}
-          >{tr(res)}</li>
-        })}</ul>
+        <Prediction prediction={currentPrediction} />
+        <div style={{
+          margin: '10px 0',
+          fontWeight: 'bold'
+        }}
+        >Hva slår {tr(game.currentHand)}?</div>
+        <ResolvedHands game={game} />
       </div>
     </div>
   );

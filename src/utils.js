@@ -13,7 +13,7 @@ export const eq = (a, b) => {
   return (a && b) && (a.className === b.className);
 };
 
-export function createPredictor (model,canvas) {
+export function createPredictor(model, canvas) {
   let cur, last;
   return async function predict() {
     const prediction = await model.predict(canvas);
@@ -26,36 +26,58 @@ export function createPredictor (model,canvas) {
   }
 };
 
-export const Game = {
-  currentHand: null,
-  hands: ['rock', 'scissors', 'paper'],
-  resolved: [],
-  randomHand: () => {
-    const d = () => {
-      const idx = Math.floor(Math.random() * Game.hands.length);
-      const hand = Game.hands[idx];
-      if (Game.resolved.slice(-1).indexOf(hand) === -1) {
-        return hand;
-      }
+export const createGame = function () {
+  const game = {
+    currentHand: null,
+    hands: ['rock', 'scissors', 'paper'],
+    resolved: [],
+    randomHand: () => {
+      const d = () => {
+        const idx = Math.floor(Math.random() * game.hands.length);
+        const hand = game.hands[idx];
+        if (game.resolved.slice(-1).indexOf(hand) === -1) {
+          return hand;
+        }
+        return d();
+      };
       return d();
-    };
-    return d();
-  },
-  timeUsed: () => {
-    return Date.now() - Game.start;
-  },
-  resolve: (hand) => {
-    if (Game.resolved.length === 0) {
-      Game.start = Date.now();
+    },
+    assignRandomCurrentHand: () => {
+      game.currentHand = game.randomHand();
+    },
+    timeUsed: () => {
+      return Date.now() - game.start;
+    },
+    resolve: (hand) => {
+      if (game.resolved.length === 0) {
+        game.start = Date.now();
+      }
+      game.resolved.push(hand);
+      return game.resolved;
+    },
+    shake: (a, b) => {
+      return [
+        'paper rock',
+        'scissors paper',
+        'rock scissors'
+      ].includes(a + ' ' + b);
+    },
+    clear: () => {
+      game.resolved = [];
+      game.currentHand = null;
     }
-    Game.resolved.push(hand);
-    return Game.resolved;
-  },
-  shake: (a, b) => {
-    return [
-      'paper rock',
-      'scissors paper',
-      'rock scissors'
-    ].includes(a + ' ' + b);
-  }
+  };
+  return game;
+};
+
+export const tr = hand => {
+  const o = {
+    rock: 'stein',
+    scissors: 'saks',
+    paper: 'papir',
+    loading: 'Laster ml',
+    initializing: 'Initialiserer webcam',
+    ready: 'Gjør noen hånd gester nå!'
+  };
+  return o[hand];
 };
