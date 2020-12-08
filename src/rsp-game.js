@@ -15,7 +15,7 @@ export const RspGame = ({ url, onDone }) => {
   const metadataURL = url + "metadata.json";
 
   const [status, setStatus] = useState('loading');
-  const [errMsg, setErrMsg] = useState(null);
+  const [errMsg, setErrMsg] = useState('');
   const [currentPrediction, setCurrentPrediction] = useState(null);
   const videoRef = useRef();
   const rafRef = useRef();
@@ -93,6 +93,7 @@ export const RspGame = ({ url, onDone }) => {
   return (
     <div className='game'>
       <h2>{tr(status)}</h2>
+      <div>{errMsg}</div>
       <div ref={videoRef}></div>
       <div style={{
         display: status === 'ready' ? 'block' : 'none'
@@ -105,7 +106,6 @@ export const RspGame = ({ url, onDone }) => {
         >Hva slår {tr(game.currentHand)}?</div>
         <ResolvedHands game={game} />
       </div>
-      <p>{errMsg}</p>
     </div>
   );
 };
