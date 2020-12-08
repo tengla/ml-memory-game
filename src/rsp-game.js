@@ -93,7 +93,7 @@ export const RspGame = ({ url, onDone }) => {
   return (
     <div className='game'>
       <h2>{tr(status)}</h2>
-      <div>err: {errMsg}</div>
+      <div style={{ color: 'red' }}>{errMsg}</div>
       <div ref={videoRef}></div>
       <div style={{
         display: status === 'ready' ? 'block' : 'none'

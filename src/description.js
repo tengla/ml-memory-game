@@ -18,6 +18,12 @@ export const Description = ({ onReady }) => {
       <p>
         Og, hvor hurtig?
       </p>
+
+      <p>
+        PS: Denne tingen vil sannsynligvis ikke kjøre på mobil i det hele tatt,
+        siden WebRTC, cam og GPU må være tilgjengelig for Browser.
+      </p>
+
       <p>
         For best resultat, gjør stein saks papir som i illustrasjonen under.
       </p>
