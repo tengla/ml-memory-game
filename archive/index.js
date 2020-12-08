@@ -51,6 +51,7 @@ async function init() {
   webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
   await webcam.setup(); // request access to the webcam
   await webcam.play();
+
   headerElement.innerHTML = 'Can u beat me?';
   window.requestAnimationFrame(loop);
   // append elements to the DOM
@@ -101,3 +102,5 @@ async function predict() {
   }));
   last = cur;
 }
+
+init();

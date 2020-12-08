@@ -5,5 +5,20 @@
   "main": "index.js",
   "author": "Thomas Tinnesand Eng",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "browserslist": [
+    "last 3 and_chr versions",
+    "last 3 chrome versions",
+    "last 3 opera versions",
+    "last 3 ios_saf versions",
+    "last 3 safari versions"
+  ],
+  "devDependencies": {
+    "cssnano": "^4.1.10"
+  }
 }
