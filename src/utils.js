@@ -77,7 +77,8 @@ export const tr = hand => {
     paper: 'papir',
     loading: 'Laster ml',
     initializing: 'Initialiserer webcam',
-    ready: 'Gjør noen hånd gester nå!'
+    ready: 'Gjør noen hånd gester nå!',
+    error: 'Noe gikk galt. Sannsynligvis fikk vi ikke tilgang til kamera!'
   };
   return o[hand];
 };

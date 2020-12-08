@@ -15,6 +15,7 @@ export const RspGame = ({ url, onDone }) => {
   const metadataURL = url + "metadata.json";
 
   const [status, setStatus] = useState('loading');
+  const [errMsg, setErrMsg] = useState(null);
   const [currentPrediction, setCurrentPrediction] = useState(null);
   const videoRef = useRef();
   const rafRef = useRef();
@@ -66,9 +67,15 @@ export const RspGame = ({ url, onDone }) => {
     setStatus('initializing');
 
     const webcam = new window.tmImage.Webcam(200, 200, true); // width, height, flip
-    await webcam.setup(); // request access to the webcam
-    await webcam.play();
-    setStatus('ready');
+    try {
+      await webcam.setup(); // request access to the webcam
+      await webcam.play();
+      setStatus('ready');
+    } catch (err) {
+      console.log(err);
+      setErrMsg(err.message);
+      setStatus('error');
+    }
 
     predictRef.current = {
       predict: createPredictor(modelRef.current, webcam.canvas)
@@ -98,6 +105,7 @@ export const RspGame = ({ url, onDone }) => {
         >Hva slår {tr(game.currentHand)}?</div>
         <ResolvedHands game={game} />
       </div>
+      <p>{errMsg}</p>
     </div>
   );
 };
