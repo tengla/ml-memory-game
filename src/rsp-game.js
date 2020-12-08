@@ -51,8 +51,7 @@ export const RspGame = ({ url, onDone }) => {
         } else {
           game.resolved = [];
         }
-        game.currentHand = game.randomHand();
-
+        game.assignRandomCurrentHand();
       }
     }
     rafRef.current = requestAnimationFrame(loop);

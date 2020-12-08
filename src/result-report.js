@@ -20,7 +20,7 @@ export const ResultReport = ({ count, timeUsed, onReset }) => {
       <h3>Whooaa, genius!</h3>
       <TimeReport count={count} timeUsed={timeUsed} />
       <p>
-        Du vet, denne tingen er heller ikke perfekt. Så ikke bli sur om
+        Du vet, denne tingen er ikke perfekt. Så ikke bli sur om
         den gjorde en feil 😁
       </p>
       <p>

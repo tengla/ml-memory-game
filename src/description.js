@@ -13,10 +13,13 @@ export const Description = ({ onReady }) => {
       </p>
 
       <p>
-        Hvor mange kombinasjoner av stein saks papir klarer du, og hvor hurtig?
+        Hvor mange kombinasjoner av stein saks papir klarer du?
       </p>
       <p>
-        For best resultat, gjør stein saks papir som i bildene under.
+        Og, hvor hurtig?
+      </p>
+      <p>
+        For best resultat, gjør stein saks papir som i illustrasjonen under.
       </p>
       <div className='description-images'>
         <img src={RockPng} alt='rock' />
@@ -24,12 +27,14 @@ export const Description = ({ onReady }) => {
         <img src={PaperPng} alt='paper' />
       </div>
 
-      <p style={{ fontWeight: 'bold' }}>
+      <p>
         Prøv å unngå ansikt innenfor rammen. Pen som du sikkert er, kommer jeg til
-        å få lavere nøyaktighet i prediksjoner.
+        å få lavere sannsynlighet i prediksjonene. Du kommer til å forvirre meg 😂
       </p>
 
-      <p>Er du klar til å begynne?</p>
+      <p style={{
+        fontWeight: 'bold'
+      }}>Er du klar til å begynne?</p>
 
       <button
         className='button'
