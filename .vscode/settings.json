@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": false,
+  // Enable per-language
+  "[javascriptreact]": {
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+}
