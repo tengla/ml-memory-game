@@ -19,10 +19,7 @@ export const Description = ({ onReady }) => {
         Og, hvor hurtig?
       </p>
 
-      <p>
-        PS: Denne tingen vil sannsynligvis ikke kjøre på mobil i det hele tatt,
-        siden WebRTC, cam og GPU må være tilgjengelig for Browser.
-      </p>
+
 
       <p>
         For best resultat, gjør stein saks papir som i illustrasjonen under.
@@ -36,6 +33,11 @@ export const Description = ({ onReady }) => {
       <p>
         Prøv å unngå ansikt innenfor rammen. Pen som du sikkert er, kommer jeg til
         å få lavere sannsynlighet i prediksjonene. Du kommer til å forvirre meg 😂
+      </p>
+
+      <p>
+        PS: Denne tingen vil sannsynligvis ikke kjøre på mobil i det hele tatt,
+        siden WebRTC, cam og GPU må være tilgjengelig for Browser.
       </p>
 
       <p style={{
