@@ -2,29 +2,29 @@
 export const getP = (prediction) => {
   const p = prediction.reduce((prev, cur) => {
     if (cur.probability > prev.probability) {
-      return cur;
+      return cur
     }
-    return prev;
-  }, { className: '', probability: 0 });
-  return p;
-};
+    return prev
+  }, { className: '', probability: 0 })
+  return p
+}
 
 export const eq = (a, b) => {
-  return (a && b) && (a.className === b.className);
-};
+  return (a && b) && (a.className === b.className)
+}
 
-export function createPredictor(model, canvas) {
-  let cur, last;
-  return async function predict() {
-    const prediction = await model.predict(canvas);
-    cur = getP(prediction);
+export const createPredictor = (model, canvas) => {
+  let cur, last
+  return async function predict () {
+    const prediction = await model.predict(canvas)
+    cur = getP(prediction)
     if (cur.probability < 0.80 || eq(cur, last)) {
-      return;
+      return
     }
-    last = cur;
-    return cur;
+    last = cur
+    return cur
   }
-};
+}
 
 export const createGame = function () {
   const game = {
@@ -33,42 +33,42 @@ export const createGame = function () {
     resolved: [],
     randomHand: () => {
       const d = () => {
-        const idx = Math.floor(Math.random() * game.hands.length);
-        const hand = game.hands[idx];
+        const idx = Math.floor(Math.random() * game.hands.length)
+        const hand = game.hands[idx]
         if (game.resolved.slice(-1).indexOf(hand) === -1) {
-          return hand;
+          return hand
         }
-        return d();
-      };
-      return d();
+        return d()
+      }
+      return d()
     },
     assignRandomCurrentHand: () => {
-      game.currentHand = game.randomHand();
+      game.currentHand = game.randomHand()
     },
     timeUsed: () => {
-      return Date.now() - game.start;
+      return Date.now() - game.start
     },
     resolve: (hand) => {
       if (game.resolved.length === 0) {
-        game.start = Date.now();
+        game.start = Date.now()
       }
-      game.resolved.push(hand);
-      return game.resolved;
+      game.resolved.push(hand)
+      return game.resolved
     },
     shake: (a, b) => {
       return [
         'paper rock',
         'scissors paper',
         'rock scissors'
-      ].includes(a + ' ' + b);
+      ].includes(a + ' ' + b)
     },
     clear: () => {
-      game.resolved = [];
-      game.currentHand = null;
+      game.resolved = []
+      game.currentHand = null
     }
-  };
-  return game;
-};
+  }
+  return game
+}
 
 export const tr = hand => {
   const o = {
@@ -79,6 +79,6 @@ export const tr = hand => {
     initializing: 'Initialiserer webcam',
     ready: 'Gjør noen hånd gester nå!',
     error: 'Noe gikk galt. Sannsynligvis fikk vi ikke tilgang til kamera!'
-  };
-  return o[hand];
-};
+  }
+  return o[hand]
+}

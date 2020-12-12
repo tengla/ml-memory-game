@@ -1,0 +1,42 @@
+
+.ul {
+  margin: 20px 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ul li {
+  margin: 5px;
+  display: inline-block;
+}
+
+
+.circle {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  border-radius: 50%;
+  text-align: center;
+  border: 1px solid #ccc;
+  background-color: green;
+  color: white;
+  font-size: 1.1em;
+  box-shadow: 0px 2px 5px 1px #676767;
+  text-shadow: 0px 0px 2px #000;
+}
+
+.circle.b {
+  transform: scale(1);
+  transition: transform 500ms ease-in-out;
+}
+
+.circle.a {
+  transform: scale(0);
+}
+
+.circle span {
+  align-self: center;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}

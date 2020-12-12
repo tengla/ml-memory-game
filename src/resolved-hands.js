@@ -1,30 +1,37 @@
-import React from 'react';
-import { tr } from './utils';
+import React, { useLayoutEffect, useState } from 'react'
+import './resolved-hands.css';
 
-const styles = {
-  ul: {
-    margin: '20px 0 0 0',
-    padding: '0',
-    listStyle: 'none'
-  },
-  li: {
-    padding: '5px',
-    margin: '5px',
-    border: '1px solid #ccc',
-    backgroundColor: 'green',
-    color: 'white',
-    display: 'inline-block',
-    borderRadius: '4px'
-  }
+export const Item = ({ name, value }) => {
+  const [state, setState] = useState(0);
+  useLayoutEffect(() => {
+    const id = setTimeout(() => {
+      setState(s => 1);
+    }, 10);
+    return () => clearTimeout(id);
+  }, []);
+  const klass = state < 1 ? 'a' : 'b';
+  return (
+    <li>
+      <div className={`circle ${klass}`}>
+        <span>{value}</span>
+        <span style={{ display: 'none' }}>{name}</span>
+      </div>
+    </li>
+  );
 };
 
 export const ResolvedHands = ({ game }) => {
-  return <ul
-    style={styles.ul}
-  >{game.resolved.map((res, idx) => {
-    return <li
-      key={`res-${idx}`}
-      style={styles.li}
-    >{idx + 1}</li>
-  })}</ul>
-};
+  return (
+    <ul className='ul'>
+      {
+        game.resolved.map((name, idx) => {
+          return <Item
+            key={`res-${idx}`}
+            value={idx + 1}
+            name={name}
+          />
+        })
+      }
+    </ul>
+  )
+}

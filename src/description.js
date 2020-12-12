@@ -1,7 +1,11 @@
-import React from 'react';
-import RockPng from './assets/rock.png';
-import ScissorsPng from './assets/scissors.png';
-import PaperPng from './assets/paper.png';
+import React from 'react'
+import RockPng from './assets/rock.png'
+import ScissorsPng from './assets/scissors.png'
+import PaperPng from './assets/paper.png'
+
+export const LinkRel = ({ to, target, children }) => {
+  return <a href={to} target={target} rel='noreferrer'>{children}</a>
+}
 
 export const Description = ({ onReady }) => {
   return (
@@ -13,13 +17,8 @@ export const Description = ({ onReady }) => {
       </p>
 
       <p>
-        Hvor mange kombinasjoner av stein saks papir klarer du?
+        Hvor mange kombinasjoner av stein saks papir klarer du, hvor hurtig?
       </p>
-      <p>
-        Og, hvor hurtig?
-      </p>
-
-
 
       <p>
         For best resultat, gjør stein saks papir som i illustrasjonen under.
@@ -31,34 +30,35 @@ export const Description = ({ onReady }) => {
       </div>
 
       <p>
-        Prøv å unngå ansikt innenfor rammen. Pen som du sikkert er, kommer jeg til
-        å få lavere sannsynlighet i prediksjonene. Du kommer til å forvirre meg 😂
+        Prøv å unngå ansikt innenfor rammen. Du kommer til å forvirre meg 😂
       </p>
 
       <p>
         PS: Denne tingen vil sannsynligvis ikke kjøre på mobil i det hele tatt,
-        siden WebRTC, cam og GPU må være tilgjengelig for Browser.
+        siden WebRTC, cam og GPU må være tilgjengelig for nettleser.
       </p>
 
       <p style={{
         fontWeight: 'bold'
-      }}>Er du klar til å begynne?</p>
+      }}
+      >Er du klar til å begynne?
+      </p>
 
       <button
         className='button'
         onClick={() => {
-          onReady();
-        }}>Start!</button>
+          onReady()
+        }}
+      >
+        Start!
+      </button>
 
       <p style={{ fontSize: '0.8em' }}>
-        (Basert på <a target='_blank' href='https://www.tensorflow.org/js'>TensorFlow.js</a>
-        og <a
-          target='_blank'
-          href='https://teachablemachine.withgoogle.com/models/xf82yR2IE/'
-        >
-          Teachable Machine.
-        </a>)
+        <span>Basert på</span>
+        <LinkRel target='_blank' to='https://www.tensorflow.org/js'>TensorFlow.js</LinkRel>
+        <span>+</span>
+        <LinkRel target='_blank' to='https://teachablemachine.withgoogle.com/models/xf82yR2IE/'>Teachable Machine.</LinkRel>
       </p>
     </div>
-  );
-};
+  )
+}
