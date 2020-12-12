@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { RspGame } from './rsp-game'
 import { ResultReport } from './result-report'
 import { Description } from './description'
-import { ResolvedHands } from './resolved-hands'
 
 export default () => {
 
@@ -12,7 +11,6 @@ export default () => {
   if (state.init) {
     return <Description onReady={() => setState({})} />
   }
-
   const resultRep = () => {
     if (!state.count) {
       return null
@@ -32,7 +30,7 @@ export default () => {
       {resultRep()}
       <RspGame
         key='game'
-        url='https://teachablemachine.withgoogle.com/models/xf82yR2IE/'
+        url='https://teachablemachine.withgoogle.com/models/GMaTd1hua/'
         onDone={(result) => {
           setState(result)
         }}

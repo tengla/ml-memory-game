@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { createPredictor, createGame, tr } from './utils'
 import { ResolvedHands } from './resolved-hands'
-import { Prediction } from './prediction'
+import { Debug } from './debug'
 
 // https://teachablemachine.withgoogle.com/models/Rza-yJgJW/;
 // https://teachablemachine.withgoogle.com/models/xf82yR2IE/
@@ -10,8 +10,8 @@ let iterations = 0
 const game = createGame()
 
 export const RspGame = ({ url, onDone }) => {
-  const modelURL = url + 'model.json'
-  const metadataURL = url + 'metadata.json'
+  const modelURL = url + 'model.json?v=2'
+  const metadataURL = url + 'metadata.json?v=2'
 
   const [status, setStatus] = useState('loading')
   const [errMsg, setErrMsg] = useState('')
@@ -76,7 +76,9 @@ export const RspGame = ({ url, onDone }) => {
     }
 
     predictRef.current = {
-      predict: createPredictor(modelRef.current, webcam.canvas)
+      predict: createPredictor(modelRef.current, webcam.canvas, {
+        threshold: 0.75
+      })
     }
 
     webcamRef.current = webcam
@@ -90,6 +92,7 @@ export const RspGame = ({ url, onDone }) => {
 
   return (
     <div className='game'>
+      <Debug data={currentPrediction} disable />
       <h2>{tr(status)}</h2>
       <div style={{ color: 'red' }}>{errMsg}</div>
       <div ref={videoRef} />
@@ -97,7 +100,6 @@ export const RspGame = ({ url, onDone }) => {
         display: status === 'ready' ? 'block' : 'none'
       }}
       >
-        {/*<Prediction prediction={currentPrediction} />*/}
         <div style={{
           margin: '10px 0',
           fontWeight: 'bold'

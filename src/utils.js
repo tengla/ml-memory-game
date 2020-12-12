@@ -13,12 +13,13 @@ export const eq = (a, b) => {
   return (a && b) && (a.className === b.className)
 }
 
-export const createPredictor = (model, canvas) => {
+export const createPredictor = (model, canvas, options = {}) => {
+  const threshold = options.threshold || 0.8;
   let cur, last
   return async function predict () {
     const prediction = await model.predict(canvas)
     cur = getP(prediction)
-    if (cur.probability < 0.80 || eq(cur, last)) {
+    if (cur.probability < threshold || eq(cur, last)) {
       return
     }
     last = cur
