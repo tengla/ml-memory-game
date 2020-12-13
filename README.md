@@ -8,4 +8,4 @@ Run `yarn serve`
 
 Build `yarn build`
 
-Håper du får en fortreffelig jul bare på tross!
+Håper du får en fortreffelig jul bare på tross av alle omstendigheter!
