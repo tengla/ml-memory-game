@@ -15,42 +15,21 @@ export const Description = ({ onReady }) => {
         Dette er ett slags spill basert på stein, saks, papir,
         med ett element av hurtighet.
       </p>
-
       <p>
-        Hvor fort klarer du å vinne 20 runder stein, saks eller papir?
+        Hvor fort klarer du å vinne 20 runder?
       </p>
-
       <p>
         For best resultat, gjør stein saks papir som i illustrasjonen under.
       </p>
-
       <div className='description-images'>
         <img src={RockPng} alt='rock' />
         <img src={ScissorsPng} alt='scissors' />
         <img src={PaperPng} alt='paper' />
       </div>
-
-      <p>
-        Prøv å unngå ansikt innenfor rammen. Du kommer til å forvirre meg.
-      </p>
-
-      <p>
-        PS: Denne tingen vil sannsynligvis ikke kjøre på mobil i det hele tatt,
-        siden WebRTC, cam og GPU må være tilgjengelig for nettleser.
-      </p>
-
-      <p>
-        Dette er ett godt eksempel på personlig bias innen maskinlæring, for jeg har kun brukt
-        mine egne hender til opplæring. Så ,,, dine hender burde ligne mine gorilla-størrrelse-hender 😂
-      </p>
-
       <p style={{
         fontWeight: 'bold'
       }}>
         Er du klar til å begynne?
-      </p>
-      <p>
-        (ps: du må tillate webcam)
       </p>
       <button
         className='button'
@@ -60,6 +39,22 @@ export const Description = ({ onReady }) => {
       >
         Start!
       </button>
+
+      <hr />
+
+      <p style={{ fontSize: '0.8em' }}>
+        Prøv å unngå ansikt innenfor rammen.
+      </p>
+
+      <p style={{ fontSize: '0.8em' }}>
+        PS: Denne tingen vil sannsynligvis ikke kjøre på mobil i det hele tatt,
+        siden WebRTC, cam og GPU må være tilgjengelig for nettleser.
+      </p>
+
+      <p style={{ fontSize: '0.8em' }}>
+        Dette er ett godt eksempel på personlig/kulturell bias innen maskinlæring. Jeg har kun brukt
+        mine egne hender til opplæring. 😂
+      </p>
 
       <p style={{ fontSize: '0.8em' }}>
         <span>Basert på</span>

@@ -24,21 +24,9 @@ export const createPredictor = (model, canvas, options = {}) => {
       stack.shift()
     }
     stack.push(cur)
-    /*const allSame = stack.every(p => eq(p,cur));
-    console.log(cur.className, allSame);
-    last = cur
-    if (cur.probability >= threshold && allSame) {
-      return cur
-    }*/
     if(cur.probability >= threshold && stack.every(p => eq(p, cur))) {
       return cur;
     }
-    /*console.log(stack.map(p => p.className));
-    if (cur.probability < threshold || stack.every(p => eq(p, cur))) {
-      return
-    }
-    last = cur
-    return cur*/
   }
 }
 
@@ -61,8 +49,11 @@ export const createGame = function () {
     assignRandomCurrentHand: () => {
       game.currentHand = game.randomHand()
     },
-    timeUsed: () => {
-      return Date.now() - game.start
+    elapsed: () => {
+      if(game.start) {
+        return Date.now() - game.start
+      }
+      return 0;
     },
     resolve: (hand) => {
       if (game.resolved.length === 0) {

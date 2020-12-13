@@ -20,16 +20,36 @@ export const Item = ({ name, value }) => {
   );
 };
 
-export const ResolvedHands = ({ game }) => {
+export const Fill = ({value}) => {
+  return (
+    <li>
+      <div className={`circle fill`}>
+        <span>{value}</span>
+      </div>
+    </li>
+  );
+};
+
+export const ResolvedHands = ({ resolved, max }) => {
+
+  const fills = [...Array(max - resolved.length).keys()].map((_,idx) => {
+    return idx + resolved.length + 1;
+  });
+
   return (
     <ul className='ul'>
       {
-        game.resolved.map((name, idx) => {
+        resolved.map((name, idx) => {
           return <Item
             key={`res-${idx}`}
             value={idx + 1}
             name={name}
           />
+        })
+      }
+      {
+        fills.map(value => {
+          return <Fill key={`res-fill-${value}`} value={value} />
         })
       }
     </ul>

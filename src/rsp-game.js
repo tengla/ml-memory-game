@@ -2,9 +2,22 @@ import React, { useState, useRef, useEffect } from 'react'
 import { createPredictor, createGame, tr } from './utils'
 import { ResolvedHands } from './resolved-hands'
 import { Debug } from './debug'
+import rockPng from './assets/rock.png'
+import scissorsPng from './assets/scissors.png';
+import paperPng from './assets/paper.png'
 
 let iterations = 0
 const game = createGame()
+const maxDraws = 20;
+
+const getPng = (k) => {
+  const sources = {
+    'paper': paperPng,
+    'rock': rockPng,
+    'scissors': scissorsPng
+  }
+  return sources[k]
+}
 
 export const RspGame = ({ url, onDone }) => {
 
@@ -24,14 +37,14 @@ export const RspGame = ({ url, onDone }) => {
     if (iterations % 4 === 0) {
       webcamRef.current.update()
       const cur = await predictRef.current.predict()
-      setCurrentPrediction(cur?.className||null);
+      setCurrentPrediction(cur?.className || null);
     }
     rafRef.current = window.requestAnimationFrame(loop)
     iterations = iterations < 1000 ? iterations + 1 : 0
   }
 
   useEffect(() => {
-    if(!currentPrediction || !game.hands.includes(currentPrediction)) {
+    if (!currentPrediction || !game.hands.includes(currentPrediction)) {
       return;
     }
     if (game.isWin(currentPrediction, game.currentHand)) {
@@ -40,14 +53,14 @@ export const RspGame = ({ url, onDone }) => {
   }, [currentPrediction]);
 
   useEffect(() => {
-    if(wins.length >= 20) {
+    if (wins.length >= maxDraws) {
       webcamRef.current.stop()
       setStatus('done')
       const _wins = wins.slice()
       setWins([])
       game.resolved = []
       onDone({
-        timeUsed: game.timeUsed(),
+        elapsed: game.elapsed(),
         count: wins.length,
         details: {
           wins: _wins
@@ -87,7 +100,9 @@ export const RspGame = ({ url, onDone }) => {
       return window.cancelAnimationFrame(rafRef.current)
     }
   }, [])
-
+  const elapsed = (decimals = 4) => {
+    return (game.elapsed() / 1000).toFixed(decimals)
+  };
   return (
     <div className='game'>
       <Debug data={currentPrediction} disable />
@@ -98,13 +113,19 @@ export const RspGame = ({ url, onDone }) => {
         display: status === 'ready' ? 'block' : 'none'
       }}
       >
+        <div>
+          <img src={getPng(game.currentHand)} alt="rock" style={{
+            width: '200px', height: '200px'
+          }} />
+        </div>
         <div style={{
           margin: '10px 0',
           fontWeight: 'bold'
         }}
         >Hva slår {tr(game.currentHand)}?
         </div>
-        <ResolvedHands game={game} />
+        <ResolvedHands resolved={game.resolved} max={maxDraws} />
+        <div>Time: {elapsed(3)}s</div>
       </div>
     </div>
   )

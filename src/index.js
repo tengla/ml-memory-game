@@ -20,11 +20,25 @@ export default () => {
     return (
       <ResultReport
         key='report'
-        timeUsed={state.timeUsed}
+        elapsed={state.elapsed}
         count={state.count}
-        onReset={() => setState({ init: true })}
       />
     )
+  }
+
+  const tryAgain = (condition) => {
+    if(!condition) {
+      return null
+    }
+    return (
+      <div>
+        <button
+          className='button'
+          onClick={() => {
+            setState({ init: true })
+          }}>Prøv igjen</button>
+      </div>
+    );
   }
 
   return (
@@ -37,6 +51,7 @@ export default () => {
           setState(result)
         }}
       />
+      {tryAgain(state.count)}
     </>
   )
 }
