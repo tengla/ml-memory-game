@@ -43,11 +43,14 @@ export const RspGame = ({ url, onDone }) => {
     if(wins.length >= 20) {
       webcamRef.current.stop()
       setStatus('done')
+      const _wins = wins.slice()
+      setWins([])
+      game.resolved = []
       onDone({
         timeUsed: game.timeUsed(),
         count: wins.length,
         details: {
-          wins
+          wins: _wins
         }
       })
     }
