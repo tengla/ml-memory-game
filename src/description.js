@@ -46,10 +46,12 @@ export const Description = ({ onReady }) => {
 
       <p style={{
         fontWeight: 'bold'
-      }}
-      >Er du klar til å begynne? (ps: du må tillate webcam)
+      }}>
+        Er du klar til å begynne?
       </p>
-
+      <p>
+        (ps: du må tillate webcam)
+      </p>
       <button
         className='button'
         onClick={() => {

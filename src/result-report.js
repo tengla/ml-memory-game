@@ -13,7 +13,7 @@ export const TimeReport = ({ count, timeUsed }) => {
     <div style={{
       fontWeight: 'bold'
     }}>
-      Du klarte {count} trekk på {_time}s! Det er {_avg}s per trekk!
+      Du klarte {count} trekk på {_time}s. Det er {_avg}s per trekk.
       Slett ikke dårlig.
     </div>
   )
@@ -22,7 +22,7 @@ export const TimeReport = ({ count, timeUsed }) => {
 export const ResultReport = ({ count, timeUsed, onReset }) => {
   return (
     <div className='result-report'>
-      <h3>Whooaa, kammerat! God jul!</h3>
+      <h3>Whooaa! Goode ole yuletide!</h3>
       <TimeReport count={count} timeUsed={timeUsed} />
       <p>
         <button
