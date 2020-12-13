@@ -8,9 +8,11 @@ export default () => {
   const [state, setState] = useState({
     init: true
   })
+
   if (state.init) {
     return <Description onReady={() => setState({})} />
   }
+
   const resultRep = () => {
     if (!state.count) {
       return null

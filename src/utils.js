@@ -14,16 +14,31 @@ export const eq = (a, b) => {
 }
 
 export const createPredictor = (model, canvas, options = {}) => {
-  const threshold = options.threshold || 0.8;
+  const threshold = options.threshold || 0.8
+  const stack = []
   let cur, last
-  return async function predict () {
+  return async function predict() {
     const prediction = await model.predict(canvas)
     cur = getP(prediction)
-    if (cur.probability < threshold || eq(cur, last)) {
+    if (stack.length > 4) {
+      stack.shift()
+    }
+    stack.push(cur)
+    /*const allSame = stack.every(p => eq(p,cur));
+    console.log(cur.className, allSame);
+    last = cur
+    if (cur.probability >= threshold && allSame) {
+      return cur
+    }*/
+    if(cur.probability >= threshold && stack.every(p => eq(p, cur))) {
+      return cur;
+    }
+    /*console.log(stack.map(p => p.className));
+    if (cur.probability < threshold || stack.every(p => eq(p, cur))) {
       return
     }
     last = cur
-    return cur
+    return cur*/
   }
 }
 
@@ -56,12 +71,18 @@ export const createGame = function () {
       game.resolved.push(hand)
       return game.resolved
     },
-    shake: (a, b) => {
-      return [
+    isWin: (a, b) => {
+      const _isWin = [
         'paper rock',
         'scissors paper',
         'rock scissors'
       ].includes(a + ' ' + b)
+      if(_isWin) {
+        game.resolve(b)
+        game.assignRandomCurrentHand()
+        return true
+      }
+      return false
     },
     clear: () => {
       game.resolved = []

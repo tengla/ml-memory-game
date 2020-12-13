@@ -13,28 +13,37 @@ export const Description = ({ onReady }) => {
       <h1>Hei!</h1>
       <p>
         Dette er ett slags spill basert på stein, saks, papir,
-        blandet med memory game + hurtighet.
+        med ett element av hurtighet.
       </p>
 
       <p>
-        Hvor mange kombinasjoner av stein saks papir klarer du, hvor hurtig?
+        Hvor fort klarer du å vinne 20 runder stein, saks eller papir?
       </p>
 
       <p>
         For best resultat, gjør stein saks papir som i illustrasjonen under.
       </p>
+
       <div className='description-images'>
         <img src={RockPng} alt='rock' />
         <img src={ScissorsPng} alt='scissors' />
         <img src={PaperPng} alt='paper' />
       </div>
+
       <p>
-        Prøv å unngå ansikt innenfor rammen. Du kommer til å forvirre meg 😂
+        Prøv å unngå ansikt innenfor rammen. Du kommer til å forvirre meg.
       </p>
+
       <p>
         PS: Denne tingen vil sannsynligvis ikke kjøre på mobil i det hele tatt,
         siden WebRTC, cam og GPU må være tilgjengelig for nettleser.
       </p>
+
+      <p>
+        Dette er ett godt eksempel på personlig bias innen maskinlæring, for jeg har kun brukt
+        mine egne hender til opplæring. Så ,,, dine hender burde ligne mine gorilla-størrrelse-hender 😂
+      </p>
+
       <p style={{
         fontWeight: 'bold'
       }}
