@@ -20,10 +20,12 @@ export const TimeReport = ({ count, timeUsed }) => {
 }
 
 export const ResultReport = ({ count, timeUsed, onReset }) => {
+
   return (
     <div className='result-report'>
-      <h3>Whooaa! Goode ole yuletide!</h3>
+      <h3>Whooaa! Goood jul!</h3>
       <TimeReport count={count} timeUsed={timeUsed} />
+      <p>Post gjerne resultatet ditt tilbake på #random som ett screenshot 😁 </p>
       <p>
         <button
           className='button'
