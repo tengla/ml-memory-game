@@ -21,14 +21,12 @@ module.exports = async (req, res) => {
       }
     })
     res.json({
-      scores,
-      secret
+      scores
     })
   } catch (err) {
     res.json({
       statusCode: 400,
-      message: err.message,
-      secret
+      message: err.message
     })
   }
 }
