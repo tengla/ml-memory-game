@@ -3,6 +3,7 @@ const faunadb = require('faunadb');
 
 const q = faunadb.query;
 const secret = process.env.FAUNADB_SECRET + ':faunadb-vercel-sample-app:server'
+console.log(secret);
 var client = new faunadb.Client({ secret })
 
 module.exports = async (req, res) => {
