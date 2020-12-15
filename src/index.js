@@ -33,30 +33,23 @@ export default () => {
     init: true
   });
 
-  useEffect(() => {
-
-    fetch('/api/beacon')
-      .then(res => res.text())
-      .then(t => {
-        console.log(t)
-      })
+  useEffect(async () => {
 
     console.log('fetch data');
 
-    fetch('/api/get-score')
-      .then(res => res.json())
-      .then(data => {
-        setScores(() => {
-          return data.scores.sort((a, b) => {
-            return a.elapsed <= b.elapsed ? -1 : 1
-          }).reduce((scores, score) => {
-            if (scores.map(s => s.id).includes(score.id)) {
-              return scores;
-            }
-            return scores.concat(score);
-          }, [])
-        })
-      });
+    const scoreData = await fetch('/api/get-score')
+      .then(res => res.json());
+
+    const _scores = scoreData.scores.sort((a, b) => {
+      return a.elapsed <= b.elapsed ? -1 : 1
+    }).reduce((scores, score) => {
+      if (scores.map(s => s.id).includes(score.id)) {
+        return scores;
+      }
+      return scores.concat(score);
+    }, []);
+
+    setScores(_scores);
 
     const name = localStorage.getItem('name');
     const email = localStorage.getItem('email');
@@ -65,7 +58,12 @@ export default () => {
       return;
     }
 
-    fetch('/api/set-score', {
+    const text = await fetch('/api/beacon')
+      .then(res => res.text())
+
+    console.log(text);
+
+    const data = await fetch('/api/set-score', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -74,10 +72,9 @@ export default () => {
         name, email,
         elapsed: state.elapsed
       })
-    })
-      .then(res => res.json())
-      .then(data => console.log(data));
+    }).then(res => res.json())
 
+    console.log(data);
   }, [state.count]);
 
   if (state.init) {

@@ -13,7 +13,7 @@ export const Description = ({ onReady }) => {
     <div className='description'>
       <h1>Hei {name}!</h1>
       <p>
-        Dette er en slags snill variant av stein, saks, papir,
+        Dette er en slags variant av stein, saks, papir,
         der du bare trenger å finne mottrekket til maskinen.
       </p>
       <p>
