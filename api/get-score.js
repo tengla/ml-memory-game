@@ -3,7 +3,6 @@ const faunadb = require('faunadb');
 
 const q = faunadb.query;
 const secret = process.env.FAUNADB_SECRET + ':faunadb-vercel-sample-app:server'
-
 var client = new faunadb.Client({ secret })
 
 module.exports = async (req, res) => {
@@ -16,8 +15,10 @@ module.exports = async (req, res) => {
     );
     const scores = result.data.map(r => {
       return {
+        id: r.data.id,
         name: r.data.name,
-        time: r.data.time
+        elapsed: r.data.elapsed,
+        createdAt: r.data.createdAt
       }
     })
     res.json({

@@ -8,9 +8,10 @@ export const LinkRel = ({ to, target, children }) => {
 }
 
 export const Description = ({ onReady }) => {
+  const name = localStorage.getItem('name');
   return (
     <div className='description'>
-      <h1>Hei!</h1>
+      <h1>Hei {name}!</h1>
       <p>
         Dette er ett slags spill basert på stein, saks, papir,
         med ett element av hurtighet.

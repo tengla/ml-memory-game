@@ -33,3 +33,46 @@ button.button:hover {
 .game {
   text-align: center;
 }
+
+.auth .actions button {
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  margin: 0 10px 0 0;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #AAA;
+  color: white;
+  text-transform: uppercase;
+  transition: background-color 125ms ease-in-out;
+  border: 1px solid black;
+}
+
+.auth .actions {
+  margin: 20px 0;
+}
+
+.auth .errors {
+  color: red
+}
+
+.auth .actions button:hover {
+  background-color: #555;
+}
+
+.field {
+  margin: 10px 0
+}
+
+.field .errors {
+  font-size: 0.8em;
+}
+
+.field label {
+  display: block;
+}
+
+.field input[type=text] {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
