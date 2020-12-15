@@ -44,7 +44,7 @@ export const Auth = ({ children }) => {
   return (
     <div className='auth'>
       <h3>Hei, hvem er du?</h3>
-      <p>For å komme på resultatlista kan du velge å gi meg navn og email.</p>
+      <p>For å komme på resultatlista kan du velge å gi navn og email.</p>
       <p>Men du kan skippe om du vil.</p>
       <div className='field'>
         <label htmlFor="name">Navn</label>
@@ -67,7 +67,7 @@ export const Auth = ({ children }) => {
         <div className='errors'>{validation.email}</div>
       </div>
       <div className='actions'>
-        <button onClick={() => {
+        <button className='primary' onClick={() => {
           const v = validate(info);
           if (!v.errors) {
             writeInfo({
@@ -80,7 +80,7 @@ export const Auth = ({ children }) => {
             setStatus('error');
           }
         }}>Lagre</button>
-        <button onClick={() => {
+        <button className='secondary' onClick={() => {
           writeInfo({
             name: '', email: '', status: 'done'
           })

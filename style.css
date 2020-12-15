@@ -1,7 +1,22 @@
+
+html, body {
+  margin: 0;
+  color: white;
+  background: radial-gradient(ellipse at bottom, #a90e0e 5%, #4e0303 55%, #330000 78%);
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+a,
+a:visited {
+  color: white;
+}
+
 #container {
   max-width: 320px;
   margin: 0 auto;
   font-family: sans-serif;
+
 }
 
 button.button {
@@ -36,7 +51,8 @@ button.button:hover {
 
 .auth .actions button {
   border: 1px solid #ccc;
-  padding: 5px 10px;
+  padding: 5px 20px;
+  font-size: 1em;
   margin: 0 10px 0 0;
   border-radius: 4px;
   cursor: pointer;
@@ -47,16 +63,28 @@ button.button:hover {
   border: 1px solid black;
 }
 
+.auth .actions button.primary {
+  background-color: rgb(100, 204, 16);
+  color: #fff;
+  border: 1px solid #6e9c45;
+}
+
+.auth .actions button.secondary {
+  background-color: #f5164e;
+  color: #dfdfdf;
+  border: 1px solid rgb(143, 44, 44);
+}
+
+.auth .actions button:hover {
+  background-color: #555;
+}
+
 .auth .actions {
   margin: 20px 0;
 }
 
 .auth .errors {
   color: red
-}
-
-.auth .actions button:hover {
-  background-color: #555;
 }
 
 .field {
@@ -73,6 +101,9 @@ button.button:hover {
 
 .field input[type=text] {
   width: 100%;
-  padding: 5px;
+  padding: 5px 10px;
   box-sizing: border-box;
+  border: 1px solid #ccc;
+  font-size: 1.2em;
+  border-radius: 4px;
 }
