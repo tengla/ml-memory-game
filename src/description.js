@@ -13,11 +13,11 @@ export const Description = ({ onReady }) => {
     <div className='description'>
       <h1>Hei {name}!</h1>
       <p>
-        Dette er ett slags spill basert på stein, saks, papir,
-        med ett element av hurtighet.
+        Dette er en slags snill variant av stein, saks, papir,
+        der du bare trenger å finne mottrekket til maskinen.
       </p>
       <p>
-        Hvor fort klarer du å vinne 20 runder?
+        Hvor fort klarer du 20 runder?
       </p>
       <p>
         For best resultat, gjør stein saks papir som i illustrasjonen under.
