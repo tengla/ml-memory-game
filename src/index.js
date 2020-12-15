@@ -15,7 +15,7 @@ export const GetTop = ({ scores }) => {
   return (
     <div>
       <h3>Topp 5</h3>
-      {scores.slice(0,5).map(score => {
+      {scores.slice(0, 5).map(score => {
         const time = (score.elapsed / 1000).toFixed(3);
         const k = score.name + ':' + time;
         return (
@@ -35,7 +35,14 @@ export default () => {
 
   useEffect(() => {
 
+    fetch('/api/beacon')
+      .then(res => res.text())
+      .then(t => {
+        console.log(t)
+      })
+
     console.log('fetch data');
+
     fetch('/api/get-score')
       .then(res => res.json())
       .then(data => {
@@ -43,11 +50,11 @@ export default () => {
           return data.scores.sort((a, b) => {
             return a.elapsed <= b.elapsed ? -1 : 1
           }).reduce((scores, score) => {
-            if(scores.map(s => s.id).includes(score.id)){
+            if (scores.map(s => s.id).includes(score.id)) {
               return scores;
             }
             return scores.concat(score);
-          },[])
+          }, [])
         })
       });
 

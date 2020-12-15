@@ -1,6 +1,7 @@
 
-const faunadb = require('faunadb');
-const crypto = require('crypto');
+const faunadb = require('faunadb')
+const crypto = require('crypto')
+const { GetEncryptedCookie } = require('../api-utils/secure-cookie')
 
 const md5sum = (str) => {
   return crypto.createHash('md5').update(str).digest('hex');
@@ -25,6 +26,24 @@ module.exports = async (req, res) => {
       message: 'Unsupported Media Type'
     });
   }
+
+  if(!req.cookies.foo) {
+    return response.status(405).json({
+      statusCode: 405,
+      message: 'Not allowed'
+    });
+  }
+
+  const cookie = GetEncryptedCookie(req.cookies.foo);
+
+  if (!(cookie.id || cookie.at)) {
+    return response.status(405).json({
+      statusCode: 405,
+      message: 'Not allowed'
+    });
+  }
+
+  console.log(cookie);
 
   const { name, email, elapsed } = req.body;
 

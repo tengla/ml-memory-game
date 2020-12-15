@@ -5,7 +5,7 @@ const q = faunadb.query;
 const secret = process.env.FAUNADB_SECRET + ':faunadb-vercel-sample-app:server'
 var client = new faunadb.Client({ secret })
 
-module.exports = async (req, res) => {
+module.exports = async (_, res) => {
   try {
     const result = await client.query(
       q.Map(
